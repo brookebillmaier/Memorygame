@@ -28,7 +28,7 @@ var cardsInPlay = [];
 
 // check for  match
 var checkForMatch = function () {
-  // Do cards match & feedback
+  // Do cards match/feedback
   if (cardsInPlay[0] === cardsInPlay[1]) {
     alert("You found a match!");
   } else {
@@ -40,10 +40,10 @@ var checkForMatch = function () {
 // user flipping a card
 var flipCard = function (cardId) {
 
-  // Display the card the user just flipped
+  // Display the card flipped
   console.log("User flipped " + cards[cardId].rank);
 
-  // Add card to array of cards that are in play
+  // Add card to array
   cardsInPlay.push(cards[cardId].rank);
 
   //image path
@@ -61,8 +61,22 @@ var flipCard = function (cardId) {
 };
 
 
+// create board
+var createBoard = function () {
+  for (var i = 0; i < cards.length; i++) {
+    var cardElement = document.createElement('img');
 
-// Call the flipCard function, passing in an index as the argument
-flipCard(0);
-// Call the flipCard function, passing in an index as the argument
-flipCard(2);
+    // back of card image
+    cardElement.setAttribute('src', 'images/back.png');
+
+    cardElement.setAttribute('data-id', i);
+
+    cardElement.addEventListener('click', flipCard);
+
+    document.getElementById('game-board').appendChild(cardElement);
+
+  }
+
+}
+
+createBoard();
